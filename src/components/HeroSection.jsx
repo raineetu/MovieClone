@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import Searchbar from "./Searchbar";
+import DisplayMovie from "./DisplayMovie";
 
 const HeroSection = () => {
   const [searchItem, setSearchItem] = useState("");
+
   return (
     <div className="hero-section text-white">
       {/* logo section */}
@@ -20,7 +22,11 @@ const HeroSection = () => {
         Without the Hassle
       </h1>
 
+      {/* Serach bar */}
       <Searchbar searchItem={searchItem} setSearchItem={setSearchItem} />
+
+      {/* Movies Section */}
+      <DisplayMovie />
     </div>
   );
 };
