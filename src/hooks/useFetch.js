@@ -14,7 +14,7 @@ const useFetch = () => {
         setLoading(true);
         // Append query parameters to the API_URL
         const endpoint = `${API_URL}?api_key=${API_KEY}&sort_by=popularity.desc`;
-        console.log(endpoint);
+        // console.log(endpoint);
         const response = await fetch(endpoint);
 
         if (!response.ok) {
@@ -22,6 +22,7 @@ const useFetch = () => {
         }
 
         const result = await response.json();
+        console.log(result);
         setData(result);
       } catch (err) {
         setError(err.message);

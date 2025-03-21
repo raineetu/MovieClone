@@ -1,22 +1,32 @@
 import React from "react";
 import useFetch from "../hooks/useFetch";
+import MovieCard from "./MovieCard";
 
-const DisplayMovie = () => {
-  const { data, loading, error } = useFetch();
+const DisplayMovie = ({ searchItem }) => {
+  const { data, loading, error } = useFetch(""); // Fetch all movies initially
+
+  // Filter movies based on the searchItem input
+  const filteredMovies = data?.results?.filter((movie) =>
+    movie.title.toLowerCase().includes(searchItem.toLowerCase())
+  );
 
   return (
     <div>
-      {loading && <p>Loading movies...</p>}
+      {loading && (
+        <div className="flex items-center justify-center my-4">
+          <div className="w-8 h-8 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
+          <p className="ml-2">Loading movies...</p>
+        </div>
+      )}
       {error && <p className="text-red-500">{error}</p>}
-      {data?.results?.length > 0 ? (
-        <div className="mt-8">
-          <h2 className="text-xl font-semibold">Popular Movies:</h2>
-          {data.results.map((movie) => (
-            <p key={movie.id}>{movie.title}</p>
+      {filteredMovies?.length > 0 ? (
+        <div className="mt-8 movieSection container">
+          {filteredMovies.map((movie) => (
+            <MovieCard key={movie.id} movie={movie} />
           ))}
         </div>
       ) : (
-        <p>No movies found.</p>
+        <p className="text-white text-lg">No movies found.</p>
       )}
     </div>
   );
