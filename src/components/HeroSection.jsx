@@ -1,35 +1,29 @@
-import React, { useState } from "react";
+import React from "react";
 import Searchbar from "./Searchbar";
-import DisplayMovie from "./DisplayMovie";
 
-const HeroSection = () => {
-  const [searchItem, setSearchItem] = useState("");
-
+const HeroSection = ({ searchItem, setSearchItem }) => {
   return (
     <>
-      <div className="hero-section text-white">
-        {/* logo section */}
-        <div className="mb-6 ">
-          <img
-            src="https://i.pinimg.com/736x/0f/41/09/0f4109ebabc4174df32d708fb77175fa.jpg"
-            alt="Movie App logo"
-            className="w-60 h-60 object-cover"
-          />
+      {/* background image */}
+      <div
+        className="relative w-full h-[450px] bg-cover bg-center"
+        style={{
+          backgroundImage:
+            "url('https://png.pngtree.com/background/20250106/original/pngtree-clipart-a-compelling-movie-poster-background-picture-image_14548386.jpg')",
+        }}
+      >
+        <div className="container">
+          {/* Title */}
+          <div className="flex flex-col justify-center items-center h-90 ">
+            <h1>
+              Find <span className="movie-title">Movies</span> You'll Love{" "}
+              <br />
+              Without the Hassle
+            </h1>
+            {/* Serach bar */}
+            <Searchbar searchItem={searchItem} setSearchItem={setSearchItem} />
+          </div>
         </div>
-
-        {/* Title */}
-        <h1 className="text-2xl sm:text-5xl font-bold">
-          Find <span className="movie-title">Movies</span> You'll Love <br />
-          Without the Hassle
-        </h1>
-
-        {/* Serach bar */}
-        <Searchbar searchItem={searchItem} setSearchItem={setSearchItem} />
-      </div>
-
-      <div className="">
-        {/* Movies Section */}
-        <DisplayMovie searchItem={searchItem} />
       </div>
     </>
   );

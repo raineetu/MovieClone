@@ -1,10 +1,17 @@
-import React from "react";
-import HeroSection from "./components/HeroSection";
+import React, { Suspense, useState } from "react";
+
+const HeroSection = React.lazy(() => import("./components/HeroSection"));
+const MovieList = React.lazy(() => import("./components/MovieList"));
 
 function App() {
+  const [searchItem, setSearchItem] = useState("");
+
   return (
     <div>
-      <HeroSection />
+      <Suspense fallback={<p>Loading...</p>}>
+        <HeroSection searchItem={searchItem} setSearchItem={setSearchItem} />
+        <MovieList searchItem={searchItem} />
+      </Suspense>
     </div>
   );
 }
